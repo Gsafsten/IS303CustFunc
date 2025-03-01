@@ -1,74 +1,11 @@
-# '''
-# Garrett Safsten
-# Section 003
-# This program will use user input for a home team name, number of season games, and each opposing team that the home team will play.
-# All of the information from the user and the generated numbers will be stored in lists and a dictionary. 
-# Then the program will generate random scores with the user input and display each game with the teams and the score.
-# The season record will also be displayed based and a message depending on the percentage of wins for the year.
-# '''
-# # Here are each of the custom functions that we will use to avoid repeating the same code multiple times.
-
-
-# #This defines the random variable and allows me to assign a random variable
-# import random 
-
-# #These are list for which we will store data into.
-# tnames = []
-# hscores = []
-# ascores = []
-# win = []
-
-# # This is a dictionary where we will store the list "tnames" inside.
-# dictsoccerteams = {"tnames": []}
-
-
-
-# #These are two questions to obtain user input for a team home name and the number of games played during the season.
-# hTeam = input("\nWhat is the name of your home team? (ex.'BYU')\n")
-# nhgames = int(input("\nHow many games will your home team play in a season? (ex. 5)\n"))
-
-# # This sets the counter for the number of games so the counter knows where to start
-# gamenum = 1
-
-# # This is a loop to gather and store all the data we need for each season game.
-# for icount in range(1, nhgames +1, 1) :
-#     aTeam = input(f"\nWhat is the name of the away team for game {gamenum}? (ex.'USU')\n") # This asks for the name of the opposing team from the user.
-#     gamenum = gamenum + 1 # This increments the number of games depending on how many games are entered byt the user for the season. Ex. game 1, game 2, etc.
-#     hscore = random.randrange(1,10) # This generates a random home score for each game.
-#     ascore = random.randrange(1,10) # This generates a random away score for each game
-#     while hscore == ascore : # This while loop ensures there is not a tie.
-#         hscore = random.randrange(1,10)
-#         ascore = random.randrange(1,10)   
-#     dictsoccerteams["tnames"].append(aTeam) # Our dictionary storing the list tnames/.
-#     hscores.append(hscore) # A list storing the home team scores for each game.
-#     ascores.append(ascore) # A list storing the away team scores for each game.
-#     if hscore > ascore : # This if statement assigns a win for each game the home team wins.
-#         hscore = "W"   
-#     else :
-#         pass
-#     win.append(hscore) # A list storing the home team wins as a "W".
-#     winscore = win.count("W")
-#     losescore = nhgames - winscore # This calculate the number of games lost by the home team.
-# print("\n") # This simply enhances the user experience by spacing out the output.
-# # The following for loop and if statment print out each game with both teams scores.
-# tnames = 0
-# for game in range(nhgames) :
-#     print(f"{hTeam}'s score: {hscores[game]} {dictsoccerteams["tnames"][game]}'s score: {ascores[game]}")
-#     tnames = tnames + 1
-# print(f"\n\nFinal season record: {winscore} - {losescore}") # Prints the season record and a message based on the percentage of wins.
-# if (winscore/nhgames) >= .75 :
-#    print("Qualified for the NCAA Women's Soccer Tournament!\n")
-# elif (winscore/nhgames) >= .50 :
-#     print("You had a good season!\n")
-# else :
-#     print("Your team needs to practice!\n")
-
 """
-Garrett Safsten, Ryand Baldwin, Jack Mair, Tanner Crookston
+Garrett Safsten, Ryan Baldwin, Jack Mair, Tanner Crookston
 Section 003
 
 Description...
 """
+
+import random 
 
 # This is our introductory message to the user.
 print("This is where the intro will go when we have actually finished the code")
@@ -80,5 +17,99 @@ def first_name(fName) :
 print("Hey" + " " + first_name(name) + " " + "Welcome to the game!")
 
 
+""" 
+What else is needed: either here or above the name input function, there needs to be an 
+introductory message explaining the rules. At the bottom, there needs to be output that
+shows the results of the game between the two teams. We also need one more function.
 
+Whatever code makes the results at the end could probably be turned into a function.
+"""
+
+# This function asks the user to select a team and returns it
+def select_team():
+    team = input("\nPlease enter the team name here: ")
+    return team
+
+# This function generates random scores and determines if the home team won or lost
+def game() :
+    score1 = 0
+    score2 = 0
+    status = None
+
+    while score1 == score2 :
+        score1 = random.randrange(0, 99)
+        score2 = random.randrange(0, 99)
+
+    if score1 > score2 :
+        status = "W"
+    if score2 < score2 :
+        status = "L"
+
+    list_record = [score1, score2, status]
+
+    return list_record
+
+dictTeams = {
+    "Arizona": "Arizona",
+    "Arizona State": "Arizona State",
+    "Baylor": "Baylor",
+    "BYU": "BYU",
+    "UCF": "UCF",
+    "Cincinnati": "Cincinnati",
+    "Colorado": "Colorado",
+    "Houston": "Houston",
+    "Iowa State": "Iowa State",
+    "Kansas": "Kansas",
+    "Kansas State": "Kansas State",
+    "Oklahoma State": "Oklahoma State",
+    "TCU": "TCU",
+    "Texas Tech": "Texas Tech",
+    "Texas": "Texas",
+    "Utah": "Utah",
+    "West Virginia": "West Virginia"
+}
+
+def print_teams():
+    for iCount in dictTeams:
+        print(dictTeams[iCount])
+
+# This part displays teams and calls the function for the user to select a team
+print("Please choose a team from the following selections: \n")
+print_teams()
+
+sHomeTeam = select_team()
+
+# This takes the home team out of the dictionary
+# The while loop is so that the user cannot continue until they choose a team from the list
+bContinue = False
+while bContinue != True :
+    if sHomeTeam not in dictTeams :
+        print("Error: please select a team from the above list")
+        sHomeTeam = select_team()
+    else :
+        bContinue = True
+        dictTeams.pop(sHomeTeam)
+
+# Displays choices and asks user to select an opponent
+print("\nNow choose an opponent from the following selections: ")
+print_teams()
+
+sAwayTeam = select_team()
+
+# Makes sure the opponent team can be used and outputs the selections
+# The while loop is so that the user cannont continue until they choose a team from the list
+bContinue = False
+while bContinue != True :
+    if sAwayTeam not in dictTeams :
+        print("Error: please select a team from the above list")
+        sAwayTeam = select_team()
+    else :
+        bContinue = True
+
+print(f"\nYou have selected {sHomeTeam} and {sAwayTeam} as your team and opponent!")
+
+# Here's where the results are stored in a list (scores and W/L for the home team).
+# Whatever function is used to display results at the end could use the list below.
+
+lstResults = game()
 
