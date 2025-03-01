@@ -18,7 +18,7 @@ def select_team():
     team = input("\nPlease enter the team name here: ")
     return team
 
-# This function generates random scores and # This function generates random scores and determines if the home team won or lost
+# This function generates random scores and determines if the home team won or lost
 def game() :
     score1 = 0
     score2 = 0
