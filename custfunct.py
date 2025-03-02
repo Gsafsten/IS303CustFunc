@@ -1,7 +1,9 @@
 """
 Garrett Safsten, Ryan Baldwin, Jack Mair, Tanner Crookston
 Section 003
-This is a game simulation where we use 5 custom functions. A home and opposing team are chosen to play eachother. A certain number of games are chosen and scores are randomly generated in each game. The results are posted at the end.
+This is a game simulation where we use 5 custom functions. A home and opposing team are chosen to play eachother. 
+A certain number of games are chosen and scores are randomly generated. 
+The results are posted at the end with an indication of a win or loss.
 """
 
 import random 
@@ -40,6 +42,7 @@ def game() :
 
     return list_record
 
+# This is a dictionary storing all the team names.
 dictTeams = {
     "Arizona": "Arizona",
     "Arizona State": "Arizona State",
@@ -65,7 +68,7 @@ def print_teams():
         print(dictTeams[iCount])
 
 # This part displays teams and calls the function for the user to select a team
-print("\nPlease choose a home team from the following selections and type it exactly as displayed above: \n")
+print("\nPlease choose a home team from the following selections and type it exactly as displayed: \n")
 print_teams()
 
 sHomeTeam = select_team()
@@ -75,14 +78,14 @@ sHomeTeam = select_team()
 bContinue = False
 while bContinue != True :
     if sHomeTeam not in dictTeams :
-        print("\nWhoops, I think you mistyped. Try again and type the team name exactly as is spelled.")
+        print("\nWhoops, I think you mistyped. Try again and type the team name exactly as it is spelled.")
         sHomeTeam = select_team()
     else :
         bContinue = True
         dictTeams.pop(sHomeTeam)
 
 # Displays choices and asks user to select an opponent
-print("\nNow choose an opponent from the following selections and type it exactly as displayed above: \n")
+print("\nNow choose an opponent from the following selections and type it exactly as displayed: \n")
 print_teams()
 
 sAwayTeam = select_team()
@@ -92,7 +95,7 @@ sAwayTeam = select_team()
 bContinue = False
 while bContinue != True :
     if sAwayTeam not in dictTeams :
-        print("\nWhoops, I think you mistyped. Try again and type the team name exactly as is spelled.")
+        print("\nWhoops, I think you mistyped. Try again and type the team name exactly as it is spelled.")
         sAwayTeam = select_team()
     else :
         bContinue = True
