@@ -108,8 +108,20 @@ while bContinue != True :
 
 print(f"\nYou have selected {sHomeTeam} and {sAwayTeam} as your team and opponent!")
 
-# Here's where the results are stored in a list (scores and W/L for the home team).
-# Whatever function is used to display results at the end could use the list below.
+# Loop to play multiple games
+game_count = int(input("How many games would you like to simulate? "))
+lstResults = []
 
-lstResults = game()
+for _ in range(game_count):
+    lstResults.append(game())
+
+# Function to display final results
+def print_results(results, home_team, away_team):
+    print("\nGame Results:")
+    for i, result in enumerate(results):
+        print(f"Game {i + 1}: {home_team} {result[0]} - {away_team} {result[1]} ({'Win' if result[2] == 'W' else 'Loss'})")
+
+# Print all game results
+print_results(lstResults, sHomeTeam, sAwayTeam)
+
 
