@@ -1,33 +1,24 @@
 """
 Garrett Safsten, Ryan Baldwin, Jack Mair, Tanner Crookston
 Section 003
-
-Description...
+This is a game simulation where we use 5 custom functions. A home and opposing team are chosen to play eachother. A certain number of games are chosen and scores are randomly generated in each game. The results are posted at the end.
 """
 
 import random 
 
 # This is our introductory message to the user.
-print("This is where the intro will go when we have actually finished the code")
-name = input("What is your first name(eg. 'John')? ")
+print("\nHello and welcome to our game simulation! You get to choose a home and opposing team to play eachother. You will choose how many games they will play and scores will be randomly chosen for each team in each game. The results will be posted at the end. But first let's get your name!")
+name = input("\nWhat is your first name(eg. 'John')? ")
 # This is a custom function that when it is called will always display "Hey(and then the users name.)"
 def first_name(fName) :
     return fName
 
-print("Hey" + " " + first_name(name) + " " + "Welcome to the game!")
+print("\nHey" + " " + first_name(name) + " " + "Welcome to the game!")
 
-
-""" 
-What else is needed: either here or above the name input function, there needs to be an 
-introductory message explaining the rules. At the bottom, there needs to be output that
-shows the results of the game between the two teams. We also need one more function.
-
-Whatever code makes the results at the end could probably be turned into a function.
-"""
 
 # This function asks the user to select a team and returns it
 def select_team():
-    team = input("\nPlease enter the team name here: ")
+    team = input("\n" + first_name(name) + " enter the team name here: ")
     return team
 
 # This function generates random scores and determines if the home team won or lost
@@ -37,8 +28,8 @@ def game() :
     status = None
 
     while score1 == score2 :
-        score1 = random.randrange(0, 99)
-        score2 = random.randrange(0, 99)
+        score1 = random.randrange(0, 10)
+        score2 = random.randrange(0, 10)
 
     if score1 > score2 :
         status = "W"
@@ -74,7 +65,7 @@ def print_teams():
         print(dictTeams[iCount])
 
 # This part displays teams and calls the function for the user to select a team
-print("Please choose a team from the following selections: \n")
+print("\nPlease choose a home team from the following selections and type it exactly as displayed above: \n")
 print_teams()
 
 sHomeTeam = select_team()
@@ -84,14 +75,14 @@ sHomeTeam = select_team()
 bContinue = False
 while bContinue != True :
     if sHomeTeam not in dictTeams :
-        print("Error: please select a team from the above list")
+        print("\nWhoops, I think you mistyped. Try again and type the team name exactly as is spelled.")
         sHomeTeam = select_team()
     else :
         bContinue = True
         dictTeams.pop(sHomeTeam)
 
 # Displays choices and asks user to select an opponent
-print("\nNow choose an opponent from the following selections: ")
+print("\nNow choose an opponent from the following selections and type it exactly as displayed above: \n")
 print_teams()
 
 sAwayTeam = select_team()
@@ -101,15 +92,15 @@ sAwayTeam = select_team()
 bContinue = False
 while bContinue != True :
     if sAwayTeam not in dictTeams :
-        print("Error: please select a team from the above list")
+        print("\nWhoops, I think you mistyped. Try again and type the team name exactly as is spelled.")
         sAwayTeam = select_team()
     else :
         bContinue = True
 
-print(f"\nYou have selected {sHomeTeam} and {sAwayTeam} as your team and opponent!")
+print("\nAwesome" + " " + first_name(name) + " " + f"you have selected {sHomeTeam} as your home team and {sAwayTeam} as your opponent!")
 
 # Loop to play multiple games
-game_count = int(input("How many games would you like to simulate? "))
+game_count = int(input("\nHow many games would you like to simulate" + " " + first_name(name) + "? "))
 lstResults = []
 
 for _ in range(game_count):
@@ -117,11 +108,10 @@ for _ in range(game_count):
 
 # Function to display final results
 def print_results(results, home_team, away_team):
-    print("\nGame Results:")
+    print("\n" + first_name(name) + " here are your game results:")
     for i, result in enumerate(results):
         print(f"Game {i + 1}: {home_team} {result[0]} - {away_team} {result[1]} ({'Win' if result[2] == 'W' else 'Loss'})")
 
 # Print all game results
 print_results(lstResults, sHomeTeam, sAwayTeam)
-
-
+print("\n")
